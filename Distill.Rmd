@@ -1,0 +1,42 @@
+---
+title: "Arleen's Final Project"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Arleen Saini
+    url: https://arleens2.github.io/gov50-final-project/
+    affiliation: Harvard Gov 50
+    affiliation_url: https://gov50-f23.github.io/assignments/final-project.html
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web. 
+
+Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+
+
+My first data visualization
+```{r}
+library(tidyverse, ggplot2)
+
+#Read in the data
+gdim_data <- read.csv("GDIM_2023_03.csv")
+
+#Plot of mean parents' years of schooling vs. mean children's years of schooling
+edplot <- gdim_data %>%
+  ggplot(aes(x = MEANp, y = MEANc)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, color = "red") +  
+  labs(x = "Mean Parents' Years of Schooling", y = "Mean Children's Years of Schooling") +
+  ggtitle("Plot of Mean Parents' vs. Mean Children's Years of Schooling")
+
+
+edplot
+```
+
+Though the plot may be rather simplistic, it demonstrates an important notion that will be fundamental in my later analyses. As parents' years of schooling increase, as do children's. We observe this as the points in the scatter plot form an upward-sloping pattern.
